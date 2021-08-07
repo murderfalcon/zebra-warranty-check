@@ -63,17 +63,21 @@ def main(argv):
                 else:
                     for data in warranty_info['actions']:
                         print("Warranty Information______")
-                        print("\tAccount Number:" + data['returnValue']['ListOfZEBSerialNumber']['Asset'][0]['OwnerAccountNumber'])
-                        print("\tProduct: " + data['returnValue']['ListOfZEBSerialNumber']['Asset'][0]['Product'])
-                        print("\tSerialNumber:" + data['returnValue']['ListOfZEBSerialNumber']['Asset'][0]['SerialNumber'])
-                        print("\tWarranty Status: " + data['returnValue']['ListOfZEBSerialNumber']['Asset'][0]['Status'])
-                        print("\tWarranty Start Date: " + data['returnValue']['ListOfZEBSerialNumber']['Asset'][0]['WarrantyStartDate'])
-                        print("\tWarranty End Date: " + data['returnValue']['ListOfZEBSerialNumber']['Asset'][0]['WarrantyEndDate'])
-                        print("\nEntitlements______")
-                        for records in data['returnValue']['ListOfZEBSerialNumber']['Asset'][0]['ListOfServiceDetails']['ServiceDetails']:
-                            print("\n\tEntitlement Type: " + records['Type_x'])
-                            print("\t\tStart Date: " + records['EntitlementStartDate'])
-                            print("\t\tEnd Date: " + records['EntitlementEndDate'])
+                        for assetNum in range(len(data['returnValue']['ListOfZEBSerialNumber']['Asset'])):
+                            print("\n\tAccount Number:" + data['returnValue']['ListOfZEBSerialNumber']['Asset'][assetNum]['OwnerAccountNumber'])
+                            print("\tProduct: " + data['returnValue']['ListOfZEBSerialNumber']['Asset'][assetNum]['Product'])
+                            print("\tSerialNumber:" + data['returnValue']['ListOfZEBSerialNumber']['Asset'][assetNum]['SerialNumber'])
+                            print("\tWarranty Status: " + data['returnValue']['ListOfZEBSerialNumber']['Asset'][assetNum]['Status'])
+                            print("\tWarranty Start Date: " + data['returnValue']['ListOfZEBSerialNumber']['Asset'][assetNum]['WarrantyStartDate'])
+                            print("\tWarranty End Date: " + data['returnValue']['ListOfZEBSerialNumber']['Asset'][assetNum]['WarrantyEndDate'])
+                            if data['returnValue']['ListOfZEBSerialNumber']['Asset'][assetNum]['ListOfServiceDetails'] == {}:
+                                print("\nNo Entitlements Found!!!")
+                            else:
+                                print("\nEntitlements______")
+                                for records in data['returnValue']['ListOfZEBSerialNumber']['Asset'][assetNum]['ListOfServiceDetails']['ServiceDetails']:
+                                        print("\n\tEntitlement Type: " + records['Type_x'])
+                                        print("\t\tStart Date: " + records['EntitlementStartDate'])
+                                        print("\t\tEnd Date: " + records['EntitlementEndDate'])
             except getopt.GetoptError:
                 print("Something Went Wrong. Oops!!!")
 if __name__ == "__main__":
