@@ -1,3 +1,6 @@
 # zebra-warranty-check
 Python Code for Cheking the Warranty Status on https://supportcommunity.zebra.com/s/warrantycheck?language=en_US
-![image](https://user-images.githubusercontent.com/88566066/128595800-cbff4c42-54f2-4984-8134-c421eeeb9f35.png)
+
+A friend of mine asked me if it was possible to check the warranty status of zebra printers without using the web interface. So I though why not.
+Using BurpSuite I was able to capture the web request export it to python then write some code that grabbed the json output and printed it all nice and pretty.
+
